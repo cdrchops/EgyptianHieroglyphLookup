@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function Hieroglyph(unicodeCode, gardinerCode, gardinerCategory, adjustedGardinerCode, additionalDetails) {
+            return {'unicodeCode': unicodeCode, 'gardinerCode': gardinerCode, 'gardinerCategory': gardinerCategory, 'adjustedGardinerCode': adjustedGardinerCode, 'additionalDetails': additionalDetails}
+        }
+
+        function Dictionary(gardiner, transliteration, translation, other) {
+            return {'gardiner': gardiner, 'transliteration': transliteration, 'translation': translation, 'other': other}
+        }
+
+    </script>
+    <script src="./dictionary.js"></script>
+    <script src="./hieroglyphs.js"></script>
+    <script src="./entries.js"></script>
+</head>
+<body>
+<!--http://unicode.org/wg2/docs/n4818-quadrat-encoding.pdf-->
+<!--&#x13000;&#x13430;&#x13250;-->
+<!--https://codepen.io/haradabox/pen/jryJdR-->
+<!--http://hieroglyphseverywhere.blogspot.com/2016/12/web-browser-test-for-hieroglyphic.html-->
+<!--https://github.com/HieroglyphsEverywhere/Fonts/tree/master/Experimental-->
+
+<!--&#x13102; &#x13432; &#x133CF;-->
+<input type="text" id="gardiner" value="G1-G1-X1-G1-D40-A14"><button onclick="convert();">Convert</button>
+<div id="middleaegyptische" style="font-size:36pt"></div>
+<div id="translationaegyptische"></div>
+<input type="text" id="lookup" value="viscera"><button onclick="lookup();">Lookup</button><br/>
+<div id="lookupageyp" style="font-size:36pt"></div>
+
+
+<script>
+    function hex2char ( hex ) {
+        // converts a single hex number to a character
+        // note that no checking is performed to ensure that this is just a hex number, eg. no spaces etc
+        // hex: string, the hex codepoint to be converted
+        var result = ''
+        var n = parseInt(hex, 16)
+        if (n <= 0x10FFFF) {
+            result += String.fromCodePoint(n)
+        } else {
+            //result += 'hex2Char error: Code point out of range: '+ dec2hex(n)
+        }
+
+        return result
+    }
+
+    function convert() {
+        var html = "";
+        // var tc = "G1-G1-X1-G1-D40-A14";//document.getElementById("gardiner")
+        //"I10-N35-V28-F51-N35-M36-D21-G43-G43-F51";//
+        var tc = document.getElementById("gardiner").value;
+        var delimiter = "-";
+        if (tc.indexOf(" ") != -1) {
+            delimiter = " ";
+        }
+        var splarr = tc.split(delimiter);
+        for (const str of splarr) {
+            html += hex2char(hmap[str].unicodeCode);
+        }
+
+        var dhtml = dmap[tc]
+        if (dhtml !== undefined) {
+            document.getElementById("translationaegyptische").innerHTML = JSON.stringify(dhtml);
+        }
+
+        document.getElementById("middleaegyptische").innerHTML = html;
+    }
+
+    function lookup() {
+        var tc = document.getElementById("lookup").value;
+        var dhtml = entryMap[tc];
+        var html = "";
+        if (dhtml !== undefined) {
+            var splarr = dhtml.split(",")
+            for (const splarrElement of splarr) {
+                var hexSplit = splarrElement.split("-")
+                for (const str of hexSplit) {
+                    html += hex2char(hmap[str].unicodeCode);
+                }
+                // // html += dmap(splarrElement);
+                html += "<br/>";
+            }
+            document.getElementById("lookupageyp").innerHTML = html;
+        }
+    }
+
+    convert();
+</script>
+</body>
+</html>
