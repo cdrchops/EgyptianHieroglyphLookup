@@ -23,6 +23,7 @@
 <!--https://codepen.io/haradabox/pen/jryJdR-->
 <!--http://hieroglyphseverywhere.blogspot.com/2016/12/web-browser-test-for-hieroglyphic.html-->
 <!--https://github.com/HieroglyphsEverywhere/Fonts/tree/master/Experimental-->
+<!--http://www.russellcottrell.com/greek/utilities/SurrogatePairCalculator.htm-->
 
 <!--&#x13102; &#x13432; &#x133CF;-->
 <input type="text" id="gardiner" value="G1-G1-X1-G1-D40-A14"><button onclick="convert();">Convert</button>
@@ -30,7 +31,57 @@
 <div id="translationaegyptische"></div>
 <input type="text" id="lookup" value="viscera"><button onclick="lookup();">Lookup</button><br/>
 <div id="lookupageyp" style="font-size:36pt"></div>
+<br/><br/>
+<div id="testElement"></div>
 
+<table style="font-size:36pt;padding:0">
+    <tr>
+        <td>
+            <table>
+                <tr rowspan="2">
+                    <td>𓃀𓇋</td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <td>𓈖</td>
+                </tr>
+                <tr>
+                    <td>𓏏</td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table>
+                <tr rowspan="2">
+                    <td>𓅪</td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <td>𓁷</td>
+                </tr>
+                <tr>
+                    <td>𓏤</td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <td>𓄣</td>
+                </tr>
+                <tr>
+                    <td>𓏤</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
 
 <script>
     function hex2char ( hex ) {
@@ -89,6 +140,12 @@
     }
 
     convert();
+
+    var tmpl = "";
+    tmpl += hex2char("1315C");
+    tmpl += hex2char("13435");
+    tmpl += hex2char("133CF");
+    document.getElementById("testElement").innerHTML = tmpl;
 </script>
 </body>
 </html>
