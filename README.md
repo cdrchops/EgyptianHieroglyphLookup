@@ -19,3 +19,11 @@ Also add the other dictionaries I know of
 
 fix display so the hieroglyphics can be stacked vertically and horizontally and in blocks as they would be in inscriptions
 
+#printable dictionary
+ways to lookup entries
+egyptian "alphabetical"
+egyptian gardiner startsWith
+by determinative
+english alphabetical
+english categories - like related to water, transportation, gods, etc
+words by dynasty

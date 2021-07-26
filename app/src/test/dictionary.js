@@ -1,4 +1,5 @@
 var dmap = new Map();
+//http://www.ancient-egypt.co.uk/transliteration/ancient_egypt_dictionary.pdf
 dmap["G1"] = new Dictionary("G1", "A", "enclitic particle", "null");
 dmap["G1"] = new Dictionary("G1", "A", "vulture, bird in general", "null");
 dmap["G1"] = new Dictionary("G1", "A", "vulture, bird in general", "null");
