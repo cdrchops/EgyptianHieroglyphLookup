@@ -33,5 +33,6 @@ dependencies {
 
 application {
     // Define the main class for the application.
+//    mainClass = 'EgyptianDictionary.App'
     mainClass = 'EgyptianDictionary.App'
 }
