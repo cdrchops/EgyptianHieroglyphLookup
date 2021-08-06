@@ -4,6 +4,7 @@
 <head>
 %{--    <meta name="layout" content="main"/>--}%
     <title>Welcome to the Egyptian Dictionary Online Project</title>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
     <style>
     .single {
         float:left;text-align:center;vertical-align: middle;position:relative
@@ -54,9 +55,17 @@
     .tripleInnerBot {
         display:block;position:relative;margin-top:-50px
     }
+
+    .source {
+        /*display:block;*//* visibility: visible;*/
+    }
     </style>
+
+
 </head>
 <body>
+<div id="showHideSup">Show/Hide Citations</div>
+
 <%
 //    def wsl = new WordSourceLink()
 //    def dsl = new DefinitionSourceLink()
@@ -89,6 +98,7 @@
             if (displayMap.containsKey(linklst.gardiner)) {
                 def value = displayMap.get(linklst.gardiner)
                 value << DefinitionLink.findAllByWord(linklst)
+                displayMap.put(linklst.gardiner, value)
             } else {
                 def value = []
                 value << DefinitionLink.findAllByWord(linklst)
@@ -125,31 +135,32 @@
         }
     }
 
-    def definition = search("definition", "tread")
-    def phonetic = search("phonetic", "a")
-    def gardiner = search("gardiner", "g1")
+    def definition = search("definition", "striking-power")
+    def phonetic = null//search("phonetic", "a")
+//    def phonetic2 = search("phonetic", "at")
+    def gardiner = null;//search("gardiner", "g1")
 %>
     <g:if test="${definition}">
         <g:each in="${definition}" var="entry">
-            ${entry.definition}<sup><%= DefinitionSourceLink.findByDefinition(entry).sourceManagement.code %></sup>
+            ${entry.definition}<sup class="source"><%= DefinitionSourceLink.findByDefinition(entry).sourceManagement.code %></sup>
             <% def defLinkList = DefinitionLink.findAll("from DefinitionLink where definition=?0", [entry]) %>
             <g:each in="${defLinkList}" var="defLink">
-                ${defLink.word.gardiner}<sup><%= DefinitionSourceLink.findByDefinition(entry).sourceManagement.code %></sup> ${defLink.word.pronunciation}<sup><%= DefinitionSourceLink.findByDefinition(entry).sourceManagement.code %></sup><br/>
+                ${defLink.word.gardiner}<sup class="source"><%= DefinitionSourceLink.findByDefinition(entry).sourceManagement.code %></sup> ${defLink.word.pronunciation}<sup class="source"><%= DefinitionSourceLink.findByDefinition(entry).sourceManagement.code %></sup><br/>
             </g:each>
         </g:each>
     </g:if>
 
     <g:if test="${phonetic}">
         <g:each in="${phonetic}" var="entry">
-            ${entry.gardiner}<sup><%= WordSourceLink.findByWord(entry).sourceManagement.code %></sup>
+            ${entry.gardiner}<sup class="source"><%= WordSourceLink.findByWord(entry).sourceManagement.code %></sup>
             <%
                def defLinkList = DefinitionLink.findAll("from DefinitionLink where word=?0", [entry])
                def display = parseDefinitionDisplay(defLinkList)
             %>
             <g:each in="${display}" var="disp">
-                ${disp.key}<sup><%= WordSourceLink.findByWord(entry).sourceManagement.code %></sup> --
+                ${disp.key}<sup class="source"><%= WordSourceLink.findByWord(entry).sourceManagement.code %></sup> --
                 <g:each in="${disp.value}" var="val">
-                    ${val} <sup><%= DefinitionSourceLink.findByDefinition(Definition.find("from Definition where definition=?0", [val])).sourceManagement.code %></sup>
+                    ${val}<sup class="source"><%= DefinitionSourceLink.findByDefinition(Definition.find("from Definition where definition=?0", [val])).sourceManagement.code %></sup>,
                 </g:each>
             </g:each>
         </g:each>
@@ -158,33 +169,41 @@
     <g:if test="${gardiner}">
         <br/>
         <g:each in="${gardiner}" var="entry">
-            ${entry.key} -
+            ${entry.key}<sup class="source">citation here</sup>
 %{--            This needs to make sure each entry has a source code attached so it can be identified where it came from --}%
             <g:each in="${entry.value}" var="val">
-                ${val.definition.definition}<sup>${DefinitionSourceLink.findAllByDefinition(val.definition).sourceManagement.code}</sup>
+                pronunciation here --
+                <% val.eachWithIndex {it, idx ->
+                    out << it.definition.definition
+                    out << raw("<sup class=\"source\">${DefinitionSourceLink.findAllByDefinition(it.definition).sourceManagement.code.join(",")}</sup>")
+//                    if (idx < val.size()) {
+                        out << ", "
+//                    }
+                } %>
             </g:each>
         </g:each>
     </g:if>
 
-    %{--def lst = Definition.list() --}%
-    %{--<g:each in="${lst}" var="entry">
-        ${entry.definition}<sup><%= DefinitionSourceLink.findByDefinition(entry).sourceManagement.description %></sup>
-    --}%%{--    <% def dsl = new DefinitionSourceLink(definition: entry, sourceManagement: sourceManagement)--}%%{--
-    --}%%{--        if (!dsl.save()) {--}%%{--
-    --}%%{--            out << dsl.errors--}%%{--
-    --}%%{--        }--}%%{--
-    --}%%{--    %>--}%%{--
-        <% def defLinkList = DefinitionLink.findAll("from DefinitionLink where definition=?0", [entry]) %>
-        <g:each in="${defLinkList}" var="defLink">
-            ${defLink.word.gardiner} -- ${defLink.word.pronunciation}<sup><%= DefinitionSourceLink.findByDefinition(entry).sourceManagement.description %></sup><br/>
 
-    --}%%{--        <% def wsl = new WordSourceLink(word: defLink.word, sourceManagement: sourceManagement)--}%%{--
-    --}%%{--            if (!wsl.save(flush:true)) {--}%%{--
-    --}%%{--                out << wsl.errors--}%%{--
-    --}%%{--            }--}%%{--
-    --}%%{--        %>--}%%{--
+%{--<g:if test="${phonetic2}">
+<br/>
+    <g:each in="${phonetic2}" var="entry">
+        ${entry.gardiner}<sup class="source"><%= WordSourceLink.findByWord(entry).sourceManagement.code %></sup>
+        <%
+            def defLinkList = DefinitionLink.findAll("from DefinitionLink where word=?0", [entry])
+            def display = parseDefinitionDisplay(defLinkList)
+        %>
+        <g:each in="${display}" var="disp">
+            ${disp.key}<sup class="source"><%= WordSourceLink.findByWord(entry).sourceManagement.code %></sup> --
+            <g:each in="${disp.value}" var="val">
+                ${val}<sup class="source"><%= DefinitionSourceLink.findByDefinition(Definition.find("from Definition where definition=?0", [val])).sourceManagement.code %></sup>,
+            </g:each>
         </g:each>
-    </g:each>--}%
+    </g:each>
+</g:if>--}%
+
+
+<br/><br/><br/>
     <div style="display:table-row">
         <div style="display:table-cell">Hieroglyphics</div>
         <div style="display:table-cell">Spelling</div>
@@ -208,5 +227,14 @@
             <div class="dualOuter"><span class="dualInnerTop">𓄣</span><span class="dualInnerBot">𓏤</span></div>
         </div></div>
     </div>
+    <script>
+        $("#showHideSup").click(function() {
+            $(".source").each(function( index ) {
+                // $(this).css("display","none");
+                // $(this).css("visibility","hidden");
+                $(this).toggle();
+            });
+        });
+    </script>
 </body>
 </html>
