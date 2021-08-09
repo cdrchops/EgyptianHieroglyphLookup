@@ -60,8 +60,6 @@
         /*display:block;*//* visibility: visible;*/
     }
     </style>
-
-
 </head>
 <body>
 <div id="showHideSup">Show/Hide Citations</div>

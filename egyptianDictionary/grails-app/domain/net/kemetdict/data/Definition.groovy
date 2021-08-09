@@ -6,4 +6,8 @@ class Definition {
     }
 
     String definition
+
+    String toString() {
+        "$id -- $definition"
+    }
 }

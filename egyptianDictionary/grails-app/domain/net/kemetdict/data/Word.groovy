@@ -13,4 +13,8 @@ class Word {
     String pronunciation
     String tone
 //    String autotranslit
+
+    String toString() {
+        "$id - $pronunciation $gardiner"
+    }
 }
