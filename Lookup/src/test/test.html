@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script>
+        var insertHTML = "";
         function Hieroglyph(unicodeCode, gardinerCode, gardinerCategory, adjustedGardinerCode, additionalDetails) {
             return {'unicodeCode': unicodeCode, 'gardinerCode': gardinerCode, 'gardinerCategory': gardinerCategory, 'adjustedGardinerCode': adjustedGardinerCode, 'additionalDetails': additionalDetails}
         }
 
         function Dictionary(gardiner, transliteration, translation, other) {
+            var tmpother = other === 'null' ? '' : other;
+            var translationCombined = translation + " " + tmpother;
+            translationCombined = translationCombined.replace(/'/g, "\\'");
+
+            insertHTML += "INSERT INTO `dictionary` (`gardiner`, `transliteration`, `translation`) VALUES ('" + gardiner + "', '" + transliteration + "', '" + translationCombined + "');<br/>";
             return {'gardiner': gardiner, 'transliteration': transliteration, 'translation': translation, 'other': other}
         }
 
@@ -105,6 +111,9 @@
 </div>
 <br/><br/><br/>
 <div id="stacker" style="font-size:36pt;position:absolute"></div>
+
+
+<div id="insertQueries"></div>
 <script>
     // vertical
     // right to left
@@ -287,6 +296,18 @@
     }
 
     convert();
+
+    document.getElementById("insertQueries").innerHTML = insertHTML;
+
+    // function logMapElements(value, key, map) {
+    //     console.log("INSERT INTO `egyptiandictionary`.`dictionary` (`gardiner`, `transliteration`, `translation`) VALUES (\'${dictionary.hieroglyph}\', \'${dictionary.transliteration}\', \'${dictionary.translation}\');");
+    // }
+    //
+    // function makeInsert() {
+    //     dmap.forEach(logMapElements);
+    // }
+    //
+    // makeInsert();
 
     // test
     // var tmpl = "";

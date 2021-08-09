@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96de22c4-9a57-454c-893a-b71afdc54289" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/egyptianDictionary/grails-app/views/index.gsp" beforeDir="false" afterPath="$PROJECT_DIR$/egyptianDictionary/grails-app/views/index.gsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/EgyptianHieroglyphLookup.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lookup/src/main/groovy/EgyptianDictionary/App.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/Lookup/src/main/groovy/EgyptianDictionary/App.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lookup/src/main/groovy/EgyptianDictionary/hold.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lookup/src/main/groovy/EgyptianDictionary/processed.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Lookup/processed.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lookup/src/test/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/Lookup/src/test/test.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +34,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -37,14 +44,21 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Lookup" />
+    </key>
+  </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -60,10 +74,22 @@
       <updated>1628196686094</updated>
       <workItem from="1628196690351" duration="16000" />
       <workItem from="1628282056802" duration="8289000" />
+      <workItem from="1628531844298" duration="4958000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

@@ -17,11 +17,12 @@ def lst = new File("./processed.txt").readLines()
 lst.eachWithIndex {it, idx ->
     try {
         if (it.contains("[")) {
-            def dictionary = new Dictionary2()
+            def dictionary = new Dictionary()
             dictionary.translation = it.substring(it.indexOf("]") + 1, it.indexOf("{"))
             dictionary.transliteration = it.substring(it.indexOf("[") + 1, it.indexOf("]"))
             dictionary.hieroglyph = it.substring(it.indexOf("{") + 1, it.indexOf("}"))
 
+            println "INSERT INTO `egyptiandictionary`.`dictionary` (`gardiner`, `transliteration`, `translation`) VALUES (\'${dictionary.hieroglyph}\', \'${dictionary.transliteration}\', \'${dictionary.translation}\');"
 //            println "dmap[\"${dictionary.hieroglyph}\"] = new Dictionary(\"${dictionary.hieroglyph}\", \"${dictionary.transliteration}\", \"${dictionary.translation}\", \"${dictionary.gardiner}\")"
         }
     } catch (Exception e) {
@@ -30,3 +31,5 @@ lst.eachWithIndex {it, idx ->
         e.printStackTrace()
     }
 }
+
+
