@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96de22c4-9a57-454c-893a-b71afdc54289" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/EgyptianHieroglyphLookup.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/EgyptianHieroglyphLookup.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/EgyptianHieroglyphLookup.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lookup/src/main/groovy/EgyptianDictionary/App.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/Lookup/src/main/groovy/EgyptianDictionary/App.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lookup/src/main/groovy/EgyptianDictionary/hold.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lookup/src/main/groovy/EgyptianDictionary/processed.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Lookup/processed.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Lookup/src/test/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/Lookup/src/test/test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/egyptianDictionary/grails-app/views/index.gsp" beforeDir="false" afterPath="$PROJECT_DIR$/egyptianDictionary/grails-app/views/index.gsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,35 +31,53 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Lookup" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\consolidatedProjects\EgyptianHieroglyphLookup\Lookup\src\test" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\consolidatedProjects\EgyptianHieroglyphLookup\Lookup\src\test\groovy" />
       <recent name="$PROJECT_DIR$/Lookup" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="HmapParse" type="GroovyScriptRunConfiguration" factoryName="Groovy" temporary="true">
+      <module name="EgyptianHieroglyphLookup" />
+      <setting name="path" value="file://$PROJECT_DIR$/Lookup/src/test/groovy/HmapParse.groovy" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="file://$PROJECT_DIR$/Lookup/src/test/groovy" />
+      <setting name="debug" value="false" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Groovy.HmapParse" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -75,6 +90,9 @@
       <workItem from="1628196690351" duration="16000" />
       <workItem from="1628282056802" duration="8289000" />
       <workItem from="1628531844298" duration="4958000" />
+      <workItem from="1628553560328" duration="1997000" />
+      <workItem from="1628793191330" duration="286000" />
+      <workItem from="1628809541110" duration="6408000" />
     </task>
     <servers />
   </component>
@@ -91,5 +109,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

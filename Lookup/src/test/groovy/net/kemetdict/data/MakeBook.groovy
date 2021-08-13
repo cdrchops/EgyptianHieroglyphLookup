@@ -1,4 +1,4 @@
-package EgyptianDictionary
+package net.kemetdict.data
 
 import net.kemetdict.data.Gardiner
 import net.kemetdict.data.Hiero
