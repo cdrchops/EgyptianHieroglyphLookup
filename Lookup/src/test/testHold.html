@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        // var insertHTML = "";
+        function Hieroglyph(unicodeCode, gardinerCode, gardinerCategory, adjustedGardinerCode, additionalDetails) {
+            return {'unicodeCode': unicodeCode, 'gardinerCode': gardinerCode, 'gardinerCategory': gardinerCategory, 'adjustedGardinerCode': adjustedGardinerCode, 'additionalDetails': additionalDetails}
+        }
+
+        function Dictionary(gardiner, transliteration, translation, other) {
+            var tmpother = other === 'null' ? '' : other;
+            var translationCombined = translation + " " + tmpother;
+            translationCombined = translationCombined.replace(/'/g, "\\'");
+
+            // insertHTML += "INSERT INTO `dictionary` (`gardiner`, `transliteration`, `translation`) VALUES ('" + gardiner + "', '" + transliteration + "', '" + translationCombined + "');<br/>";
+            return {'gardiner': gardiner, 'transliteration': transliteration, 'translation': translation, 'other': other}
+        }
+
+    </script>
+<!--    <script src="./dictionary.js"></script>-->
+<!--    <script src="./hieroglyphs.js"></script>-->
+    <script src="./dict.js"></script>
+    <script src="./phonetic.js"></script>
+    <script src="./definition.js"></script>
+    <script src="./hieroglyphs.js"></script>
+    <style>
+        .single {
+            float:left;text-align:center;vertical-align: middle;position:relative
+        }
+
+        .dualSideOuter {
+            float:left;
+            text-align:center;
+            position:relative;
+            margin-top:-15px
+        }
+
+        .dualSideTop {
+            /*display:block;position:relative*/
+        }
+
+        .dualSideBot {
+            /*display:block;position:relative;margin-top:-50px*/
+        }
+
+        .dualOuter {
+            float:left;
+            text-align:center;
+            position:relative;
+            margin-top:-15px
+        }
+
+        .dualInnerTop {
+            display:block;position:relative
+        }
+
+        .dualInnerBot {
+            display:block;position:relative;margin-top:-50px
+        }
+
+        .tripleOuter {
+            float:left;
+            text-align:center;
+            position:relative;
+            margin-top:-15px
+        }
+        .tripleInnerTop {
+            display:block;position:relative;margin-top:-15px
+        }
+        .tripleInnerMid {
+            display:block;position:relative;margin-top:-45px
+        }
+        .tripleInnerBot {
+            display:block;position:relative;margin-top:-50px
+        }
+    </style>
+</head>
+<body>
+<!--http://unicode.org/wg2/docs/n4818-quadrat-encoding.pdf-->
+<!--&#x13000;&#x13430;&#x13250;-->
+<!--https://codepen.io/haradabox/pen/jryJdR-->
+<!--http://hieroglyphseverywhere.blogspot.com/2016/12/web-browser-test-for-hieroglyphic.html-->
+<!--https://github.com/HieroglyphsEverywhere/Fonts/tree/master/Experimental-->
+<!--http://www.russellcottrell.com/greek/utilities/SurrogatePairCalculator.htm-->
+
+<!--&#x13102; &#x13432; &#x133CF;-->
+<!--<input type="text" id="gardiner" value="D58-M17-N35-X1-G37-D2-Z1-F34-Z1"><button onclick="convert();">Convert</button>
+<div id="middleaegyptische" style="font-size:36pt"></div>
+<div id="translationaegyptische"></div>
+<input type="text" id="lookup" value="viscera"><button onclick="lookup();">Lookup</button><br/>
+<div id="lookupageyp" style="font-size:36pt"></div>
+<br/><br/>
+<div id="testElement"></div>
+
+&lt;!&ndash;<span style="font-size:36pt;padding:0">&ndash;&gt;
+&lt;!&ndash;𓃀𓇋𓈖𓏏𓅪𓁷𓏤𓄣𓏤&ndash;&gt;
+&lt;!&ndash;</span>&ndash;&gt;
+<br/>
+<div style="font-size:36pt;position:absolute">
+    <div class="single">𓃀</div>
+    <div class="single">𓇋</div>
+    <div class="dualOuter"><span class="dualInnerTop">𓈖</span><span class="dualInnerBot">𓏏</span></div>
+    <div class="single">𓅪</div>
+    <div class="dualOuter"><span class="dualInnerTop">𓁷</span><span class="dualInnerBot">𓏤</span></div>
+    <div class="dualOuter"><span class="dualInnerTop">𓄣</span><span class="dualInnerBot">𓏤</span></div>
+</div>
+<br/><br/><br/>
+<div style="font-size:36pt;position:absolute">
+    <div class="dualOuter"><span class="dualInnerTop">𓃛</span><span class="dualInnerBot">𓏏</span></div>
+    <div style="float:left;text-align:center;position:relative;margin-top:-15px"><span style="display:block;position:relative">𓄯</span><span style="display:block;position:relative;margin-top:-50px">𓏛</span></div>
+</div>
+<br/><br/><br/>
+<div id="stacker" style="font-size:36pt;position:absolute"></div>-->
+<h1>Hieroglpyh Lookup</h1><br/>
+<div id="hiero"></div>
+<h1>Phonetic Lookup</h1><br/>
+<div id="phonet"></div>
+<h1>Definition Lookup</h1><br/>
+<div id="defi"></div>
+
+
+<script src="./testStuff.js"></script>
+<script>
+    function parseGardiner(tmp, delimiter) {
+        var splarr = tmp.split(delimiter);
+        var uni = "<span style=\"font-size: 30pt\">";
+        for (const str of splarr) {
+            var tmpmap = hmap[str.trim()];
+            if (tmpmap) {
+                uni += hex2char(hmap[str.trim()].unicodeCode);
+            } else {
+
+                uni += "<span style=\"font-size: 12pt\">" + str + "</span>";
+            }
+        }
+        uni += "</span>";
+
+        return uni;
+    }
+
+    function processGardiner(tmp) {
+        // var tmpa = tmp.gardiner.split("-")
+        var delimiter = "-";
+        /*if (tmp.indexOf(" ") !== -1) {
+            delimiter = " ";
+        }*/
+        var uni = "";
+        if (tmp.indexOf(",") !== -1) {
+            var comsplarr = tmp.split(",")
+            for (const com of comsplarr) {
+                // console.log("compsplarr " + com);
+
+                uni += parseGardiner(com, delimiter);
+                uni += ",&nbsp;&nbsp;"
+            }
+        } else {
+            uni += parseGardiner(tmp, delimiter);
+        }
+
+        return uni;
+    }
+
+    function iteration() {
+        var html = "";
+
+        for (var d in dmap) {
+            var dict = dmap[d];
+            var uni = processGardiner(dict.gardiner);
+            html += uni;
+            html += "&nbsp;&nbsp;&nbsp;&nbsp; -- [" + dict.transliteration + "] <b>" + dict.translation + "</b> {" + dict.gardiner + "}";
+            html += "<br/>";
+
+            document.getElementById("hiero").innerHTML = html;
+        }
+    }
+
+    iteration();
+
+    function definition() {
+        var html = "";
+
+        for (var d in defmap) {
+            var dict = defmap[d];
+            var uni = processGardiner(dict.gardiner);
+            // html += uni;
+
+            // html += dict.gardiner + " " + dict.translation;
+            html += dict.translation;
+            html += "&nbsp;&nbsp;&nbsp;&nbsp; -- " + uni + " [<b>" + dict.transliteration + "</b>]  {" + dict.gardiner + "}";
+            html += "<br/>";
+
+            document.getElementById("defi").innerHTML = html;
+        }
+    }
+
+    // definition();
+
+    function phoneti() {
+        var html = "";
+
+        for (var d in phonmap) {
+            var dict = phonmap[d];
+            console.log(dict);
+            var uni = processGardiner(dict.gardiner);
+            // html += uni;
+
+            // html += dict.gardiner + " " + dict.translation;
+            html += dict.transliteration;
+            html += "&nbsp;&nbsp;&nbsp;&nbsp; -- " + uni + "  <b>" + dict.translation + "</b> {" + dict.gardiner + "}";
+            html += "<br/>";
+
+            document.getElementById("phonet").innerHTML = html;
+        }
+    }
+
+    // phoneti();
+</script>
+</body>
+</html>

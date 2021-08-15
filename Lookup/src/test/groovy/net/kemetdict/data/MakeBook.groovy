@@ -1,88 +1,108 @@
 package net.kemetdict.data
 
-import net.kemetdict.data.Gardiner
-import net.kemetdict.data.Hiero
-import net.kemetdict.data.Translate
-import net.kemetdict.data.Transliteration
+def dictionary = new File("./database.txt").readLines()
+def hieroglyphs = new File("./hieroglyphs.txt").readLines()
+def phon = new File("./phonetic.txt").readLines()
+def defin = new File("./definition.txt").readLines()
 
-def gardiner = new File("gardiner.tsv").readLines()
-def hiero = new File("hiero.tsv").readLines()
-def translation = new File("translation.tsv").readLines()
-def transliterate = new File("transliteration.tsv").readLines()
+//group_concat(distinct gardiner separator ', ')	group_concat(distinct phonetic separator ', ')	group_concat(distinct definition separator ', ')	group_concat(distinct notes separator ', ')
 
-def hglyph = {
-    def result = ''
-
-    def n = Integer.parseInt("13000", 16)
-    if (n <= 0x10FFFF) {
-//        char[] ch=Character.toChars(codepoint);
-
-//        result += String.fromCodePoint(n)
-        result += Character.toChars(n);
-    } else {
-        //result += 'hex2Char error: Code point out of range: '+ dec2hex(n)
-    }
-
-    return result;
-}
-
-def hieroMap = [:]
-hiero.each {
-    def tmp = new Hiero()
-    def starr = it.split(",")
-
-    starr.eachWithIndex {
-        switch (it) {
+def output = new File("./output.txt")
+output.write("")
+/*dictionary.each {
+    def gardiner, phonetic, definition, notes
+    def splarr = it.split("\t");
+    splarr.eachWithIndex { String entry, int i ->
+        switch(i) {
             case 0:
-                tmp.id = it
+                gardiner = entry
                 break
             case 1:
-                tmp.version = it
+                phonetic = entry
                 break
             case 2:
-                tmp.unicodeCode = it
+                definition = entry
                 break
             case 3:
-                tmp.gardinerCode = it
-                break
-            case 4:
-                tmp.gardinerCategory = it
-                break
-            case 5:
-                tmp.adjustedGardinerCode = it
-                break
-            case 6:
-                tmp.additionalDetails = it
+                notes = entry
                 break
         }
     }
 
-    hieroMap.put(tmp.gardinerCode, tmp)
+//    output.append("dmap[\"${gardiner}\"] = new Dictionary(\"${gardiner}\", \"${phonetic}\", \"${definition}\", \"${notes}\");\n")
 }
 
-def gardinerMap = [:]
-gardiner.each {
-    def tmp = new Gardiner()
-    def starr = it.split("\t")
-
-    starr.eachWithIndex { String entry, int i ->
-        switch (it) {
+hieroglyphs.each {
+    def unicode, gardiner, category, gardinerModified, notes
+    def splarr = it.split("\t");
+    splarr.eachWithIndex { String entry, int i ->
+        switch(i) {
             case 0:
-                tmp.gardiner = it
+                unicode = entry
                 break
             case 1:
-                tmp.transliteration = it
+                gardiner = entry
                 break
             case 2:
-                tmp.translation = it
+                category = entry
+                break
+            case 3:
+                gardinerModified = entry
+                break
+            case 4:
+                notes = entry
                 break
         }
     }
 
-    def tmpg = new StringBuilder()
-    tmp.gardiner.split("-").each {
-        tmpg << hglyph(hieroMap.get(it).unicodeCode)
+//    output.append("hmap[\"${gardinerModified}\"] = Hieroglyph(\"${unicode}\", \"${gardiner}\", \"${category}\", \"${gardinerModified}\", \"${notes}\");\n")
+}*/
+
+phon.each {
+    def gardiner, phonetic, definition, notes
+    def splarr = it.split("\t");
+    splarr.eachWithIndex { String entry, int i ->
+        switch(i) {
+            case 0:
+                phonetic = entry
+                break
+            case 1:
+                gardiner = entry
+                break
+            case 2:
+                definition = entry
+                break
+            case 3:
+                notes = entry
+                break
+        }
     }
 
-    println tmpg
+    output.append("phonmap[\"${phonetic}\"] = new Dictionary(\"${gardiner}\", \"${phonetic}\", \"${definition}\", \"${notes}\");\n")
 }
+
+defin.each {
+    def gardiner, phonetic, definition, notes
+    def splarr = it.split("\t");
+    splarr.eachWithIndex { String entry, int i ->
+        switch(i) {
+            case 0:
+                definition = entry
+
+                break
+            case 1:
+                gardiner = entry
+
+                break
+            case 2:
+                phonetic = entry
+                break
+            case 3:
+                notes = entry
+                break
+        }
+    }
+
+    output.append("defmap[\"${definition}\"] = new Dictionary(\"${gardiner}\", \"${phonetic}\", \"${definition}\", \"${notes}\");\n")
+}
+

@@ -297,6 +297,18 @@
 
     convert();
 
+    function iteration() {
+        var html = "";
+        for (var m in hmap){
+            var tmp = hmap[m];
+            // html += "hieroMap[\"" + tmp.gardinerCode + "\"] = new Hiero(unicodeCode: \"" + tmp.unicodeCode + "\", gardinerCode: \"" + tmp.gardinerCode + "\", gardinerCategory: \"" + tmp.gardinerCategory + "\", adjustedGardinerCode: \"" + tmp.adjustedGardinerCode + "\", additionalDetails: \"" + tmp.additionalDetails + "\")<br/>"
+        }
+
+        document.getElementById("insertQueries").innerHTML = html;
+    }
+
+    iteration();
+
     // document.getElementById("insertQueries").innerHTML = insertHTML;
 
     // function logMapElements(value, key, map) {
