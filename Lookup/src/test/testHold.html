@@ -9,13 +9,23 @@
             return {'unicodeCode': unicodeCode, 'gardinerCode': gardinerCode, 'gardinerCategory': gardinerCategory, 'adjustedGardinerCode': adjustedGardinerCode, 'additionalDetails': additionalDetails}
         }
 
-        function Dictionary(gardiner, transliteration, translation, other) {
+        function Dictionary(gardiner, transliteration, translation, other, entryNumber) {
             var tmpother = other === 'null' ? '' : other;
             var translationCombined = translation + " " + tmpother;
             translationCombined = translationCombined.replace(/'/g, "\\'");
 
             // insertHTML += "INSERT INTO `dictionary` (`gardiner`, `transliteration`, `translation`) VALUES ('" + gardiner + "', '" + transliteration + "', '" + translationCombined + "');<br/>";
             return {'gardiner': gardiner, 'transliteration': transliteration, 'translation': translation, 'other': other}
+        }
+
+
+        function DictionaryWithIndex(gardiner, transliteration, translation, other, entryNumber) {
+            var tmpother = other === 'null' ? '' : other;
+            var translationCombined = translation + " " + tmpother;
+            translationCombined = translationCombined.replace(/'/g, "\\'");
+
+            // insertHTML += "INSERT INTO `dictionary` (`gardiner`, `transliteration`, `translation`) VALUES ('" + gardiner + "', '" + transliteration + "', '" + translationCombined + "');<br/>";
+            return {'gardiner': gardiner, 'transliteration': transliteration, 'translation': translation, 'other': other, 'entryNumber': entryNumber}
         }
 
     </script>
@@ -93,7 +103,43 @@
                 uni += ",&nbsp;&nbsp;"
             }
         } else {
+            var number = dmap[tmp].entryNumber;
+            uni += "<a name=\"" + number + "\"></a>";
             uni += parseGardiner(tmp, delimiter);
+        }
+
+        return uni;
+    }
+
+    function processGardinerSuperscript(tmp) {
+        // var tmpa = tmp.gardiner.split("-")
+        var delimiter = "-";
+        /*if (tmp.indexOf(" ") !== -1) {
+            delimiter = " ";
+        }*/
+        var uni = "";
+        if (tmp.indexOf(",") !== -1) {
+            var comsplarr = tmp.split(",")
+            for (var com of comsplarr) {
+                com = com.trim();
+                var lookup = dmap[com];
+                if (lookup?.entryNumber === undefined) {
+                    console.log(com);
+                    // console.log(dmap[com]);//.entryNumber;
+                }
+
+                uni += parseGardiner(com, delimiter);
+                var number = dmap[com].entryNumber;
+                uni += "<sup><a href=\"#" + number + "\">" + number + "</a></sup>";
+                // uni += "<sup>" + lookup.entryNumber + "</sup>"
+                uni += ",&nbsp;&nbsp;"
+            }
+        } else {
+            // var lookup = dmap[tmp].entryNumber;
+            uni += parseGardiner(tmp, delimiter);
+            // uni += "<sup>" + lookup + "</sup>"
+            var number = dmap[tmp].entryNumber;
+            uni += "<sup><a href=\"#" + number + "\">" + number + "</a></sup>";
         }
 
         return uni;
@@ -110,7 +156,7 @@
         for (var d in dmap) {
             var dict = dmap[d];
             var uni = processGardiner(dict.gardiner);
-            html += displaySection(uni, "[<b>" + dict.transliteration + "</b>] " + dict.translation + " <br/>{" + dict.gardiner + "}");
+            html += displaySection(uni, "[<b>" + dict.transliteration + "</b>] " + dict.translation + " <br/>{" + dict.gardiner + "} #"+dict.entryNumber + "<br/>");
             // html += "<tr><td>" + uni + "</td><td>" +"&nbsp;&nbsp;&nbsp;&nbsp;[<b>" + dict.transliteration + "</b>] <b>" + dict.translation + "</b> {" + dict.gardiner + "}"+ " </td></tr>";
             // html += "<div class='row'><div class='cell'>" + uni + "</div><div class='cell'>" +"&nbsp;&nbsp;&nbsp;&nbsp;[<b>" + dict.transliteration + "</b>] <b>" + dict.translation + "</b> {" + dict.gardiner + "}"+ " </div></div>";
         }
@@ -127,9 +173,9 @@
 
         for (var d in phonmap) {
             var dict = phonmap[d];
-            var uni = processGardiner(dict.gardiner);
+            var uni = processGardinerSuperscript(dict.gardiner);
 
-            html += displaySection(dict.transliteration, "<b>" + uni + "</b>  <br/>" + dict.translation + " <br/>{" + dict.gardiner + "}");
+            html += displaySection(dict.transliteration, uni + "  <br/>");
             // html += "<tr><td>" + dict.transliteration + "</td><td>" +"&nbsp;&nbsp;&nbsp;&nbsp;<b>" + uni + "</b>  " + dict.translation + " {" + dict.gardiner + "}"+ " </td></tr>";
         }
 
@@ -146,9 +192,9 @@
 
         for (var d in defmap) {
             var dict = defmap[d];
-            var uni = processGardiner(dict.gardiner);
+            var uni = processGardinerSuperscript(dict.gardiner);
 
-            html += displaySection(dict.translation, "" + uni + "<br/> [<b>" + dict.transliteration + "</b>]  <br/>{" + dict.gardiner + "}");
+            html += displaySection(dict.translation, "" + uni + "<br/>");
             // html += "<tr><td>" + dict.translation + "</td><td>" +"&nbsp;&nbsp;&nbsp;&nbsp;" + uni + " [<b>" + dict.transliteration + "</b>]  {" + dict.gardiner + "}"+ "</td></tr>";
         }
         // html += "</table><br/>";

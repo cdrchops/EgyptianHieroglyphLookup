@@ -5,19 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96de22c4-9a57-454c-893a-b71afdc54289" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/EgyptianHieroglyphLookup.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/EgyptianHieroglyphLookup.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lookup/src/main/groovy/EgyptianDictionary/App.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/Lookup/src/main/groovy/EgyptianDictionary/App.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lookup/src/test/dictionary.js" beforeDir="false" afterPath="$PROJECT_DIR$/Lookup/src/test/dictionary.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lookup/src/test/groovy/hmap.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Lookup/src/test/groovy/hmap.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lookup/src/test/groovy/net/kemetdict/data/MakeBook.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/Lookup/src/test/groovy/net/kemetdict/data/MakeBook.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lookup/src/test/groovy/net/kemetdict/data/gardiner.tsv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lookup/src/test/groovy/net/kemetdict/data/hiero.tsv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lookup/src/test/groovy/net/kemetdict/data/translation.tsv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lookup/src/test/groovy/net/kemetdict/data/transliteration.tsv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lookup/src/test/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/Lookup/src/test/test.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/makebook/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/makebook/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lookup/src/test/testHold.html" beforeDir="false" afterPath="$PROJECT_DIR$/Lookup/src/test/testHold.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +31,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Lookup" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Lookup/src/main/groovy/EgyptianDictionary" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -54,6 +43,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Lookup/src/main/groovy/EgyptianDictionary" />
       <recent name="D:\consolidatedProjects\EgyptianHieroglyphLookup\Lookup\src\test\groovy\net\kemetdict\data" />
       <recent name="D:\consolidatedProjects\EgyptianHieroglyphLookup\Lookup\src\test" />
     </key>
@@ -62,16 +52,14 @@
       <recent name="$PROJECT_DIR$/Lookup" />
     </key>
   </component>
-  <component name="RunManager" selected="Groovy.MakeBook">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="Groovy.NumberMap">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -96,8 +84,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="NumberMap" type="GroovyScriptRunConfiguration" factoryName="Groovy" temporary="true">
+      <module name="EgyptianHieroglyphLookup" />
+      <setting name="path" value="file://$PROJECT_DIR$/Lookup/src/main/groovy/EgyptianDictionary/NumberMap.groovy" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="file://$PROJECT_DIR$/Lookup/src/main/groovy/EgyptianDictionary" />
+      <setting name="debug" value="false" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Groovy.NumberMap" />
         <item itemvalue="Groovy.MakeBook" />
         <item itemvalue="Groovy.HmapParse" />
       </list>
@@ -118,6 +118,7 @@
       <workItem from="1628793191330" duration="286000" />
       <workItem from="1628809541110" duration="6408000" />
       <workItem from="1628971016436" duration="5750000" />
+      <workItem from="1629127776697" duration="1577000" />
     </task>
     <servers />
   </component>
