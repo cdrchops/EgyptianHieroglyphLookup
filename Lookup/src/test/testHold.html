@@ -52,9 +52,87 @@
             word-break: break-all;
             white-space: normal;
         }
+
+        .hieroglyphDisplay {
+            font-size: 20pt
+        }
+
+        .normalFont {
+            font-size: 12pt
+        }
+
+        .cellNumber {
+            display:table-cell;
+            width: 50px;
+        }
+
+        .single {
+            float:left;text-align:center;vertical-align: middle;position:relative
+        }
+
+        .dualSideOuter {
+            float:left;
+            text-align:center;
+            position:relative;
+            margin-top:-15px
+        }
+
+        .dualSideTop {
+            /*display:block;position:relative*/
+        }
+
+        .dualSideBot {
+            /*display:block;position:relative;margin-top:-50px*/
+        }
+
+        .dualOuter {
+            float:left;
+            text-align:center;
+            position:relative;
+            margin-top:-15px
+        }
+
+        .dualInnerTop {
+            display:block;position:relative
+        }
+
+        .dualInnerBot {
+            display:block;position:relative;margin-top:-50px
+        }
+
+        .tripleOuter {
+            float:left;
+            text-align:center;
+            position:relative;
+            margin-top:-15px
+        }
+        .tripleInnerTop {
+            display:block;position:relative;margin-top:-15px
+        }
+        .tripleInnerMid {
+            display:block;position:relative;margin-top:-45px
+        }
+        .tripleInnerBot {
+            display:block;position:relative;margin-top:-50px
+        }
     </style>
 </head>
 <body>
+<div style="font-size:36pt;position:absolute">
+    <div class="single">𓃀</div>
+    <div class="single">𓇋</div>
+    <div class="dualOuter"><span class="dualInnerTop">𓈖</span><span class="dualInnerBot">𓏏</span></div>
+    <div class="single">𓅪</div>
+    <div class="dualOuter"><span class="dualInnerTop">𓁷</span><span class="dualInnerBot">𓏤</span></div>
+    <div class="dualOuter"><span class="dualInnerTop">𓄣</span><span class="dualInnerBot">𓏤</span></div>
+</div>
+<br/><br/><br/>
+<div style="font-size:36pt;position:absolute">
+    <div class="dualOuter"><span class="dualInnerTop">𓃛</span><span class="dualInnerBot">𓏏</span></div>
+    <div style="float:left;text-align:center;position:relative;margin-top:-15px"><span style="display:block;position:relative">𓄯</span><span style="display:block;position:relative;margin-top:-50px">𓏛</span></div>
+</div>
+<br/><br/><br/>
+<div id="stacker" style="font-size:36pt;position:absolute"></div>
 
 <h1>Hieroglpyh Lookup</h1><br/>
 <div style="display:table">
@@ -69,140 +147,31 @@
 <div id="defi"></div>
 </div>
 <script src="./testStuff.js"></script>
+<script src="./dictionary.js"></script>
 <script>
-    function parseGardiner(tmp, delimiter) {
-        var splarr = tmp.split(delimiter);
-        var uni = "<span style=\"font-size: 20pt\">";
-        for (const str of splarr) {
-            var tmpmap = hmap[str.trim()];
-            if (tmpmap) {
-                uni += hex2char(hmap[str.trim()].unicodeCode);
-            } else {
+    // https://stackoverflow.com/questions/1222045/how-to-loop-all-the-elements-that-match-the-regex
+    function matches() {
+        var targetText = "Y1:Z2";
+        // targetText.match(/([A-Za]{1,3}[0-9]{1,3})/g).forEach((element) => {
+        //     console.log(element);
+        //     // Do something with each element
+        // });
 
-                uni += "<span style=\"font-size: 12pt\">" + str + "</span>";
-            }
+        const matches = targetText.matchAll(/([A-Za]{1,3}[0-9]{1,3})/g);
+        for (const match of matches) {
+
+            // the complete match
+            const fullMatch = match[0];
+
+            // isolating each capture group match
+            const group1 = match[1];
+            const group2 = match[2];
+            // index of where the match starts
+            const cursorPos = match.index;
         }
-        uni += "</span>";
-
-        return uni;
     }
 
-    function processGardiner(tmp) {
-        // var tmpa = tmp.gardiner.split("-")
-        var delimiter = "-";
-        /*if (tmp.indexOf(" ") !== -1) {
-            delimiter = " ";
-        }*/
-        var uni = "";
-        if (tmp.indexOf(",") !== -1) {
-            var comsplarr = tmp.split(",")
-            for (const com of comsplarr) {
-                // console.log("compsplarr " + com);
-
-                uni += parseGardiner(com, delimiter);
-                uni += ",&nbsp;&nbsp;"
-            }
-        } else {
-            var number = dmap[tmp].entryNumber;
-            uni += "<a name=\"" + number + "\"></a>";
-            uni += parseGardiner(tmp, delimiter);
-        }
-
-        return uni;
-    }
-
-    function processGardinerSuperscript(tmp) {
-        // var tmpa = tmp.gardiner.split("-")
-        var delimiter = "-";
-        /*if (tmp.indexOf(" ") !== -1) {
-            delimiter = " ";
-        }*/
-        var uni = "";
-        if (tmp.indexOf(",") !== -1) {
-            var comsplarr = tmp.split(",")
-            for (var com of comsplarr) {
-                com = com.trim();
-                var lookup = dmap[com];
-                if (lookup?.entryNumber === undefined) {
-                    console.log(com);
-                    // console.log(dmap[com]);//.entryNumber;
-                }
-
-                uni += parseGardiner(com, delimiter);
-                var number = dmap[com].entryNumber;
-                uni += "<sup><a href=\"#" + number + "\">" + number + "</a></sup>";
-                // uni += "<sup>" + lookup.entryNumber + "</sup>"
-                uni += ",&nbsp;&nbsp;"
-            }
-        } else {
-            // var lookup = dmap[tmp].entryNumber;
-            uni += parseGardiner(tmp, delimiter);
-            // uni += "<sup>" + lookup + "</sup>"
-            var number = dmap[tmp].entryNumber;
-            uni += "<sup><a href=\"#" + number + "\">" + number + "</a></sup>";
-        }
-
-        return uni;
-    }
-
-    function displaySection(firstCell, secondCell) {
-        return "<div class='row'><div class='cellA'>" + firstCell + "</div><div class='cellB'>" + secondCell + " </div></div>";
-    }
-
-    function iteration() {
-        // var html = "<table>";
-        var html = "";
-
-        for (var d in dmap) {
-            var dict = dmap[d];
-            var uni = processGardiner(dict.gardiner);
-            html += displaySection(uni, "[<b>" + dict.transliteration + "</b>] " + dict.translation + " <br/>{" + dict.gardiner + "} #"+dict.entryNumber + "<br/>");
-            // html += "<tr><td>" + uni + "</td><td>" +"&nbsp;&nbsp;&nbsp;&nbsp;[<b>" + dict.transliteration + "</b>] <b>" + dict.translation + "</b> {" + dict.gardiner + "}"+ " </td></tr>";
-            // html += "<div class='row'><div class='cell'>" + uni + "</div><div class='cell'>" +"&nbsp;&nbsp;&nbsp;&nbsp;[<b>" + dict.transliteration + "</b>] <b>" + dict.translation + "</b> {" + dict.gardiner + "}"+ " </div></div>";
-        }
-        // html += "</table><br/>";
-
-        document.getElementById("hiero").innerHTML = html;
-    }
-
-    iteration();
-
-    function phoneti() {
-        var html = "";
-        // var html = "<table>";
-
-        for (var d in phonmap) {
-            var dict = phonmap[d];
-            var uni = processGardinerSuperscript(dict.gardiner);
-
-            html += displaySection(dict.transliteration, uni + "  <br/>");
-            // html += "<tr><td>" + dict.transliteration + "</td><td>" +"&nbsp;&nbsp;&nbsp;&nbsp;<b>" + uni + "</b>  " + dict.translation + " {" + dict.gardiner + "}"+ " </td></tr>";
-        }
-
-        // html += "</table><br/>";
-
-        document.getElementById("phonet").innerHTML = html;
-    }
-
-    phoneti();
-
-    function definition() {
-        // var html = "<table>";
-        var html = "";
-
-        for (var d in defmap) {
-            var dict = defmap[d];
-            var uni = processGardinerSuperscript(dict.gardiner);
-
-            html += displaySection(dict.translation, "" + uni + "<br/>");
-            // html += "<tr><td>" + dict.translation + "</td><td>" +"&nbsp;&nbsp;&nbsp;&nbsp;" + uni + " [<b>" + dict.transliteration + "</b>]  {" + dict.gardiner + "}"+ "</td></tr>";
-        }
-        // html += "</table><br/>";
-
-        document.getElementById("defi").innerHTML = html;
-    }
-
-    definition();
+    // matches();
 </script>
 </body>
 </html>
