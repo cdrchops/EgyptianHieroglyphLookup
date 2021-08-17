@@ -5,7 +5,7 @@ I do not know where the PDF dictionary came from.  If you know, please let me kn
 
 hieroglyphs.js -- this is a Gardiner indexed map that provides the Unicode value and Gardiner category.
 
-dictionary.js -- this is an indexed map of dictionary entries looked up by Gardiner codes 
+parser.js -- this is an indexed map of dictionary entries looked up by Gardiner codes 
 
 entries.js -- this is an indexed map of values that return a list of Gardiner codes that can be looked up.
 

@@ -29,7 +29,7 @@
         }
 
     </script>
-<!--    <script src="./dictionary.js"></script>-->
+<!--    <script src="./parser.js"></script>-->
 <!--    <script src="./hieroglyphs.js"></script>-->
     <script src="./dict.js"></script>
     <script src="./phonetic.js"></script>
@@ -49,7 +49,7 @@
             display:table-cell;
             overflow-wrap: break-word;
             width:400px;
-            word-break: break-all;
+            word-break: break-word;
             white-space: normal;
         }
 
@@ -115,24 +115,13 @@
         .tripleInnerBot {
             display:block;position:relative;margin-top:-50px
         }
+
+        img {
+            height: 20pt;
+        }
     </style>
 </head>
 <body>
-<div style="font-size:36pt;position:absolute">
-    <div class="single">𓃀</div>
-    <div class="single">𓇋</div>
-    <div class="dualOuter"><span class="dualInnerTop">𓈖</span><span class="dualInnerBot">𓏏</span></div>
-    <div class="single">𓅪</div>
-    <div class="dualOuter"><span class="dualInnerTop">𓁷</span><span class="dualInnerBot">𓏤</span></div>
-    <div class="dualOuter"><span class="dualInnerTop">𓄣</span><span class="dualInnerBot">𓏤</span></div>
-</div>
-<br/><br/><br/>
-<div style="font-size:36pt;position:absolute">
-    <div class="dualOuter"><span class="dualInnerTop">𓃛</span><span class="dualInnerBot">𓏏</span></div>
-    <div style="float:left;text-align:center;position:relative;margin-top:-15px"><span style="display:block;position:relative">𓄯</span><span style="display:block;position:relative;margin-top:-50px">𓏛</span></div>
-</div>
-<br/><br/><br/>
-<div id="stacker" style="font-size:36pt;position:absolute"></div>
 
 <h1>Hieroglpyh Lookup</h1><br/>
 <div style="display:table">
@@ -146,8 +135,9 @@
 <h1>Definition Lookup</h1><br/>
 <div id="defi"></div>
 </div>
-<script src="./testStuff.js"></script>
-<script src="./dictionary.js"></script>
+
+<script src="layout.js"></script>
+<script src="parser.js"></script>
 <script>
     // https://stackoverflow.com/questions/1222045/how-to-loop-all-the-elements-that-match-the-regex
     function matches() {
